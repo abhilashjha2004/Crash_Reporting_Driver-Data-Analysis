@@ -68,3 +68,10 @@ sns.countplot(data=df, y='Light', order=df['Light'].value_counts().index)
 plt.title('Crashes by Light Condition')
 plt.tight_layout()
 plt.show()
+
+# 5. Injury severity
+plt.figure(figsize=(8, 4))
+sns.countplot(data=df, y='Injury Severity', order=df['Injury Severity'].value_counts().index)
+plt.title('Crash Injury Severity Distribution')
+plt.tight_layout()
+plt.show()
