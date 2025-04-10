@@ -52,3 +52,13 @@ plt.xticks(rotation=45)
 plt.title('Weather Conditions during Crashes')
 plt.tight_layout()
 plt.show()
+
+# 3. Crashes by hour
+plt.figure(figsize=(10, 4))
+sns.histplot(df['Crash Hour'].dropna(), bins=24, kde=True)
+plt.title('Crashes by Hour of Day')
+plt.xlabel('Hour')
+plt.ylabel('Number of Crashes')
+plt.tight_layout()
+plt.show()
+
