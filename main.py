@@ -75,3 +75,10 @@ sns.countplot(data=df, y='Injury Severity', order=df['Injury Severity'].value_co
 plt.title('Crash Injury Severity Distribution')
 plt.tight_layout()
 plt.show()
+
+# 6. Crash locations on map (scatterplot of lat/long)
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='Longitude', y='Latitude', data=df, hue='ACRS Report Type', palette='Set1')
+plt.title("Crash Locations (Lat vs Long)")
+plt.tight_layout()
+plt.show()
