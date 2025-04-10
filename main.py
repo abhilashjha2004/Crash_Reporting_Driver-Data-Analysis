@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv(r'C:\Users\abhil\PycharmProjects\PythonProject\Crash_Reporting_-_Drivers_Data.csv')
+data = pd.read_excel('Crash_Reporting_-_Drivers_Data.xlsx')
 print(data.head())
 
 # Check the shape of the dataset
@@ -21,3 +21,4 @@ data.dropna(subset=['Crash Date/Time', 'Latitude', 'Longitude'], inplace=True)
 
 # Alternatively, you can fill missing values
 # data['Vehicle Make'].fillna('Unknown', inplace=True)
+
