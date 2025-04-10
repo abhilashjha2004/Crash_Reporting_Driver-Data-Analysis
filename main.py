@@ -62,3 +62,9 @@ plt.ylabel('Number of Crashes')
 plt.tight_layout()
 plt.show()
 
+# 4. Light conditions
+plt.figure(figsize=(8, 4))
+sns.countplot(data=df, y='Light', order=df['Light'].value_counts().index)
+plt.title('Crashes by Light Condition')
+plt.tight_layout()
+plt.show()
