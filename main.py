@@ -45,3 +45,10 @@ plt.title('Crash Counts by Type')
 plt.tight_layout()
 plt.show()
 
+# 2. Weather conditions
+plt.figure(figsize=(8, 4))
+sns.countplot(data=df, x='Weather', order=df['Weather'].value_counts().index)
+plt.xticks(rotation=45)
+plt.title('Weather Conditions during Crashes')
+plt.tight_layout()
+plt.show()
