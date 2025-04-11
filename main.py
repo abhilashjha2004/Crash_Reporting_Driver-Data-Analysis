@@ -100,3 +100,15 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
+# --- HEATMAP: Crash frequency by Hour vs Weekday ---
+# Create a pivot table
+pivot = df.pivot_table(index='Crash Weekday', columns='Crash Hour', values='Crash Date/Time', aggfunc='count')
+pivot = pivot.reindex(order)  # Order weekdays correctly
+
+plt.figure(figsize=(12, 6))
+sns.heatmap(pivot, cmap='Reds', linewidths=.5, annot=True, fmt=".0f")
+plt.title("Heatmap of Crashes (Weekday vs Hour)")
+plt.xlabel("Hour of Day")
+plt.ylabel("Day of Week")
+plt.tight_layout()
+plt.show()
