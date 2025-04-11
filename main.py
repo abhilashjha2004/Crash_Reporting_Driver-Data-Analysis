@@ -82,3 +82,12 @@ sns.scatterplot(x='Longitude', y='Latitude', data=df, hue='ACRS Report Type', pa
 plt.title("Crash Locations (Lat vs Long)")
 plt.tight_layout()
 plt.show()
+
+# --- BAR CHART: Number of crashes per weekday ---
+plt.figure(figsize=(8, 4))
+order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+sns.countplot(data=df, x='Crash Weekday', order=order)
+plt.title("Number of Crashes per Weekday")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
