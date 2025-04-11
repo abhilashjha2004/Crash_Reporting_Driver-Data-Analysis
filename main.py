@@ -91,3 +91,12 @@ plt.title("Number of Crashes per Weekday")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+# --- BOX PLOT: Crash hour distribution per weekday ---
+plt.figure(figsize=(10, 5))
+sns.boxplot(x='Crash Weekday', y='Crash Hour', data=df, order=order)
+plt.title("Crash Time Distribution by Weekday")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
