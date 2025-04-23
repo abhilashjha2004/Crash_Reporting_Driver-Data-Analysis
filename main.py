@@ -5,6 +5,7 @@ import seaborn as sns
 df = pd.read_excel('Crash_Reporting_-_Drivers_Data.xlsx')
 print(df.head())
 
+print(df.tail())
 # Check the shape of the dataset
 print(f"Dataset Shape: {df.shape}")
 
@@ -21,12 +22,6 @@ print(missing_data[missing_data > 0])
 # Dropping rows with missing critical columns (example)
 df.dropna(subset=['Crash Date/Time', 'Latitude', 'Longitude'], inplace=True)
 
-# Alternatively, you can fill missing values
-# data['Vehicle Make'].fillna('Unknown', inplace=True)
-
-print()
-print()
-
 # Convert 'Crash Date/Time' to datetime
 df['Crash Date/Time'] = pd.to_datetime(df['Crash Date/Time'], errors='coerce')
 
@@ -34,6 +29,40 @@ df['Crash Date/Time'] = pd.to_datetime(df['Crash Date/Time'], errors='coerce')
 df['Crash Date'] = df['Crash Date/Time'].dt.date
 df['Crash Hour'] = df['Crash Date/Time'].dt.hour
 df['Crash Weekday'] = df['Crash Date/Time'].dt.day_name()
+
+# Step 2: Select only numerical columns
+numerical_df = df.select_dtypes(include='number')
+
+# Step 3: Drop rows with missing values
+cleaned_df = numerical_df.dropna()
+
+# Step 4: Calculate IQR for each column
+Q1 = cleaned_df.quantile(0.25)
+Q3 = cleaned_df.quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Step 5: Detect outliers
+outliers = (cleaned_df < lower_bound) | (cleaned_df > upper_bound)
+outlier_summary = outliers.sum()
+
+# Step 6: Remove rows with any outliers
+non_outliers_df = cleaned_df[~outliers.any(axis=1)]
+
+# Step 7: Compute covariance matrix
+cov_matrix = non_outliers_df.cov()
+
+# Step 8: Save cleaned data to Excel
+non_outliers_df.to_excel("Cleaned_Crash_Data.xlsx", index=False)
+
+# Print summary
+print("Lower Bound:\n", lower_bound)
+print("\nUpper Bound:\n", upper_bound)
+print("\nOutliers Detected (count):\n", outlier_summary)
+print("\nCovariance Matrix:\n", cov_matrix)
+
 
 # --- EDA Visualizations ---
 
@@ -112,3 +141,7 @@ plt.xlabel("Hour of Day")
 plt.ylabel("Day of Week")
 plt.tight_layout()
 plt.show()
+
+
+
+
